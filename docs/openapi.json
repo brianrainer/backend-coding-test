@@ -1,0 +1,44 @@
+{
+  "openapi": "3.0.1",
+
+  "info": {
+    "title": "Xendit Rides",
+    "version": "1.0.0",
+    "description": "Rides management API"
+  }, 
+
+  "servers": [
+    {
+      "url": "http://localhost:8010/",
+      "description": "Local server"
+    }
+  ],
+
+  "tags": [
+    {
+      "name": "Rides CRUD"
+    }
+  ],
+
+  "path": {
+    "/health": {
+      "get": {
+        "description": "Returns system health check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Healthy",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
