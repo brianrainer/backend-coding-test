@@ -16,14 +16,15 @@
 
   "tags": [
     {
-      "name": "Rides CRUD"
+      "name": "rides",
+      "description": "Rides CRUD operations"
     }
   ],
 
   "path": {
     "/health": {
       "get": {
-        "description": "Returns system health check",
+        "description": "Returns system health check.",
         "parameters": [],
         "responses": {
           "200": {
@@ -35,6 +36,147 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+
+    "/rides": {
+      "get": {
+        "tags": ["rides"],
+        "description": "Get all rides from system",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "A list of all rides.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RidesResponse"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Rides Not Found Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "components": {
+    "schemas": {
+      "ridesId": {
+        "type": "integer",
+        "description": "Rides identification number.",
+        "example": 1234
+      },
+      "startLong": {
+        "type": "number",
+        "format": "decimal",
+        "description": "Rides starting longitude position.",
+        "minimum": -180.0,
+        "maximum": 180.0,
+        "example": -178.912
+      },
+      "endLong": {
+        "type": "number",
+        "format": "decimal",
+        "description": "Rides destination longitude position.",
+        "minimum": -180.0,
+        "maximum": 180.0,
+        "example": 123.456
+      },
+      "startLat": {
+        "type": "number",
+        "format": "decimal",
+        "description": "Rides starting latitude position.",
+        "minimum": -90.0,
+        "maximum": 90.0,
+        "example": -89.123
+      },
+      "endLat": {
+        "type": "number",
+        "format": "decimal",
+        "description": "Rides destination latitude position.",
+        "minimum": -90.0,
+        "maximum": 90.0,
+        "example": 78.123
+      },
+      "riderName": {
+        "type": "string",
+        "description": "Name of the person who use the ride service.",
+        "minLength": 1,
+        "example": "Alice"
+      },
+      "driverName": {
+        "type": "string",
+        "description": "Name of the driver in the ride.",
+        "minLength": 1,
+        "example": "Bob"
+      },
+      "driverVehicle": {
+        "type": "string",
+        "description": "Name of vehicle driven by driver.",
+        "minLength": 1,
+        "example": "Toyota Avanza"
+      },
+      "RidesResponse": {
+        "type": "object",
+        "properties": {
+          "ridesId" : {
+            "$ref": "#/components/schemas/ridesId"
+          },
+          "startLat": {
+            "$ref": "#/components/schemas/startLat"
+          },
+          "startLong": {
+            "$ref": "#/components/schemas/startLong"
+          },
+          "endLat": {
+            "$ref": "#/components/schemas/endLat"
+          },
+          "endLong": {
+            "$ref": "#/components/schemas/endLong"
+          },
+          "riderName": {
+            "$ref": "#/components/schemas/riderName"
+          },
+          "driverName": {
+            "$ref": "#/components/schemas/driverName"
+          },
+          "driverVehicle": {
+            "$ref": "#/components/schemas/driverVehicle"
+          },
+          "created": {
+            "description": "Date and time when the rides created.",
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-12-12 20:12:12"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Error message to be displayed."
+          },
+          "internal_code": {
+            "type": "string",
+            "description": "Internal error code for debugging."
           }
         }
       }
