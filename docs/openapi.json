@@ -21,7 +21,7 @@
     }
   ],
 
-  "path": {
+  "paths": {
     "/health": {
       "get": {
         "description": "Returns system health check.",
@@ -150,6 +150,7 @@
 
     "/rides/{id}": {
       "get": {
+        "tags": ["rides"],
         "description": "Get rides by id number",
         "operationId": "getRide",
         "parameters": [
